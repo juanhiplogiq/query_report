@@ -37,6 +37,17 @@ module QueryReport
           @chart.data << [column_title, query.sum(column)]
         end
       end
+
+      def count_with(options)
+        @chart.data = []
+        counts   = query.group(options.fetch(:column)).count
+        title_mappings = options.fetch(:title_mappings){nil}
+
+        counts.each do |column_value, column_count|
+          title = title_mappings ? title_mappings.fetch(column_value){column_value.to_s} : column_value.to_s
+          @chart.data << [title, column_count]  
+        end
+      end
     end
   end
 end
