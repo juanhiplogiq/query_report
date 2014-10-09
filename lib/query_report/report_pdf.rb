@@ -1,3 +1,5 @@
+require 'prawn/table'
+
 module QueryReport
   class ReportPdf
     attr_reader :pdf, :options, :report
